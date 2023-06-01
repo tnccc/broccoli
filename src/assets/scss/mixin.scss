@@ -1,0 +1,29 @@
+@mixin textDecoration {
+  a {
+    &:hover {
+      
+      > span {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+
+    span {
+      position: relative;
+      z-index : 1;
+  
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: var(--bv);
+        width: 0%;
+        height: 1px;
+        background-color: var(--green);
+        transition: width .3s;
+      }
+    }
+  }
+
+}

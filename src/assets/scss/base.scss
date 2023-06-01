@@ -1,19 +1,34 @@
-:root{
-  --bv: .5rem;
-}
+@use 'sass:math';
+@use 'function' as *;
+@import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap");
 
-html {
-  font-size      : 1rem;
+:root{
+  --bv           : .5rem;
+  --desktop-width: 1480px;
+
+    // color
+  --white: #FFFFFF;
+  --black: #232322;
+  --cream: #F9F8F3;
+  --green: #708848;
+  
+    // font
+  --font-size-medium: #{rem(16)};
+  --font-family-main: 'M PLUS Rounded 1c', sans-serif;
+
+  --letter-spacing-normal: .02em;
+
+  --opacity        : .65;
+  --transition-time: .3s;
 }
 
 body {
-  background-color     : var(--white);
+  background-color     : var(--cream);
   font-family          : var(--font-family-main);
-  line-height          : var(--line-height-normal);
-  letter-spacing       : var(--letter-spacing-normal);
   word-wrap            : break-word;
   font-feature-settings: 'palt';
 }
+
 ul {
   list-style: none;
   li {
