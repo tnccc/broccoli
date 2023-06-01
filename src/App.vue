@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import GlobalHeader from '@/components/GlobalHeader.vue';
+import SectionOfTop from '@/components/section/OfTop.vue'
 </script>
 
 <template>
-  <div :class="$style.pages">
     <GlobalHeader />
-    <main></main>
-  </div>
-
+    <main :class="$style.main">
+      <SectionOfTop />
+    </main>
 </template>
 
 <style lang="scss" module>
-.pages {
+.main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100dvh;
+  height: calc(100dvh - var(--header-height));
 }
 </style>
 

@@ -6,20 +6,24 @@
   --bv           : .5rem;
   --desktop-width: 1480px;
 
-    // color
+  // color
   --white: #FFFFFF;
   --black: #232322;
   --cream: #F9F8F3;
   --green: #708848;
   
-    // font
+  // font
   --font-size-medium: #{rem(16)};
   --font-family-main: 'M PLUS Rounded 1c', sans-serif;
-
   --letter-spacing-normal: .02em;
 
+  // option
   --opacity        : .65;
   --transition-time: .3s;
+
+  // component
+  --header-height   : #{rem(54)};
+  --navigation-width: #{rem(180)};
 }
 
 body {

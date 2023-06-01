@@ -6,7 +6,7 @@
   <header :class="$style.header">
     <div :class="$style.container">
       <div :class="$style.left_column">
-        <h1>LOGO</h1>
+        <h1>Broccoli</h1>
         <a href="/">
           <img src="@/assets/img/instagram.png" alt="instagram">
         </a>
@@ -27,7 +27,7 @@
   padding       : calc(var(--bv) * 1.5) calc(var(--bv) * 2.5);
   position      : relative;
   color         : var(--green);
-  letter-spacing: var(letter-spacing-normal);
+  letter-spacing: var(--letter-spacing-normal);
 
   &::after {
     content            : "";
