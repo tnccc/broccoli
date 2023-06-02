@@ -1,6 +1,7 @@
 @use 'sass:math';
 @use 'function' as *;
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap");
+@import url("https://use.typekit.net/hlf3ofz.css");
 
 :root{
   --bv           : .5rem;
@@ -11,11 +12,14 @@
   --black: #232322;
   --cream: #F9F8F3;
   --green: #708848;
+  --blue : #757FAE;
   
   // font
   --font-size-medium: #{rem(16)};
   --font-family-main: 'M PLUS Rounded 1c', sans-serif;
+  --font-family-heading: 'josefin-slab';
   --letter-spacing-normal: .02em;
+  
 
   // option
   --opacity        : .65;

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import GlobalHeader from '@/components/GlobalHeader.vue';
 import SectionOfTop from '@/components/section/OfTop.vue'
+import SectionOfConcept from '@/components/section/OfConcept.vue'
 </script>
 
 <template>
     <GlobalHeader />
     <main :class="$style.main">
-      <SectionOfTop />
+      <SectionOfTop :class="$style.top" />
+      <SectionOfConcept :class="[$style.concept, $style.margin]" />
     </main>
 </template>
 
@@ -16,6 +18,14 @@ import SectionOfTop from '@/components/section/OfTop.vue'
   flex-direction: column;
   width: 100%;
   height: calc(100dvh - var(--header-height));
+
+  .top {
+    margin-block-start: calc(var(--bv) * 16);
+  }
+
+  .margin {
+    margin-block-start: calc(var(--bv) * 22);
+  }
 }
 </style>
 

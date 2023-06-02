@@ -42,7 +42,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       > div {
         > span {
           display       : block;
-          font-size     : calcClamp(50, 60, 740, 1440);
+          font-size     : calcClamp(40, 60, 740, 1440);
           font-weight   : bold;
           letter-spacing: .35em;
         }
