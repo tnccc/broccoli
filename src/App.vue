@@ -2,6 +2,7 @@
 import GlobalHeader from '@/components/GlobalHeader.vue';
 import SectionOfTop from '@/components/section/OfTop.vue'
 import SectionOfConcept from '@/components/section/OfConcept.vue'
+import SectionOfMenu from '@/components/section/OfMenu.vue'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import SectionOfConcept from '@/components/section/OfConcept.vue'
     <main :class="$style.main">
       <SectionOfTop :class="$style.top" />
       <SectionOfConcept :class="[$style.concept, $style.margin]" />
+      <SectionOfMenu :class="[$style.concept, $style.margin]"/>
     </main>
 </template>
 

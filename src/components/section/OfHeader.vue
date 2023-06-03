@@ -3,13 +3,14 @@ type Props = {
   first: string,
   second: string,
   ja: string,
+  direction?: string
 }
 
 const props = defineProps<Props>()
 </script>
 
 <template>
-  <h2>
+  <h2 :class="$style[direction]">
     <span :class="$style.en">
       <span>{{ first }}</span>{{ second }}
     </span>
@@ -21,9 +22,11 @@ const props = defineProps<Props>()
 @use '@/assets/scss/function' as *;
 
 h2 {
-  display: flex;
+  display       : flex;
   flex-direction: column;
-  align-items: flex-end;
+  &.right {
+    align-items: flex-end;
+  }
   
   span {
     display: block;

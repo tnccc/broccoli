@@ -15,11 +15,13 @@
   --blue : #757FAE;
   
   // font
+  --font-size-small: #{rem(14)};
   --font-size-medium: #{rem(16)};
   --font-family-main: 'M PLUS Rounded 1c', sans-serif;
-  --font-family-heading: 'josefin-slab';
+  --font-family-heading  : 'josefin-slab';
   --letter-spacing-normal: .02em;
-  
+  --line-height-low      : 1;
+  --line-height-normal   : 1.5;
 
   // option
   --opacity        : .65;

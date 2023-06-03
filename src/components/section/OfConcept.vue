@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import SectionOfHeader from '@/components/section/OfHeader.vue'
 import SectionContainer from '@/components/section/OfContainer.vue'
-import SectionOfConceptLeadTitle from '@/components/SectionConceptLeadTitle.vue'
-
 </script>
 
 <template>
   <section :class="$style.concept">
     <SectionContainer>
       <SectionOfHeader 
+        :direction="'right'"
         :first="'CON'"
         :second="'CEPT'"
         :ja="'コンセプト'"
       />
       <div :class="$style.container">
-        <SectionOfConceptLeadTitle />
         <div :class="$style.contents">
           <div>
             <figure :class="$style.image">
@@ -37,12 +35,14 @@ import SectionOfConceptLeadTitle from '@/components/SectionConceptLeadTitle.vue'
 </template>
 
 <style lang="scss" module>
+@use '@/assets/scss/function.scss' as *;
+
 .concept {
-  --transform-image: translateY(calc(var(--bv) * 8));
-  --transform-text : translateY(calc(var(--bv) * 16));
+  --margin-image: calc(var(--bv) * 8);
+  --margin-text : calc(var(--bv) * 16);
   
   .container {
-    margin-top: calc(var(--bv) * 8);
+    margin-top: calc(var(--bv) * 12);
 
     .contents {
       margin-top: calc(var(--bv) * 8);
@@ -53,19 +53,20 @@ import SectionOfConceptLeadTitle from '@/components/SectionConceptLeadTitle.vue'
         gap: 0 calc(var(--bv) * 4);
 
         > * {
-          flex : 0 0 calc(var(--bv) * 40);
-          width: calc(var(--bv) * 40);
+          flex     : 1 1 calc(var(--bv) * 40);
+          max-width: calc(var(--bv) * 40);
         }
         
         .text {
-          text-align    : justify;
-          transform     : var(--transform-text);
-          line-height: 2;
+          margin-block-start: var(--margin-text);
+          font-size: calcClamp(12, 16, 1480, 768);
+          text-align        : justify;
+          line-height       : 2;
         }
 
         .image {
           &:last-of-type {
-            transform: var(--transform-image);
+            margin-block-start: var(--margin-image);
           }
         }
       }
