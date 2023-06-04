@@ -3,6 +3,7 @@ import GlobalHeader from '@/components/GlobalHeader.vue';
 import SectionOfTop from '@/components/section/OfTop.vue'
 import SectionOfConcept from '@/components/section/OfConcept.vue'
 import SectionOfMenu from '@/components/section/OfMenu.vue'
+import SectionOfGallery from '@/components/section/OfGallery.vue'
 </script>
 
 <template>
@@ -11,6 +12,8 @@ import SectionOfMenu from '@/components/section/OfMenu.vue'
       <SectionOfTop :class="$style.top" />
       <SectionOfConcept :class="[$style.concept, $style.margin]" />
       <SectionOfMenu :class="[$style.concept, $style.margin]"/>
+      <SectionOfGallery :class="[$style.gallery, $style.margin
+    ]"/>
     </main>
 </template>
 

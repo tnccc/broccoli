@@ -10,6 +10,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
+    "@splidejs/vue-splide": "^0.6.12",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
     "sass": "^1.62.1",
