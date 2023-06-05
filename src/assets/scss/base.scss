@@ -23,6 +23,11 @@
   --letter-spacing-normal: .02em;
   --line-height-low      : 1;
   --line-height-normal   : 1.5;
+  
+  // z-index
+  --z-index-min     : 10;
+  --z-index-contents: 50;
+  --z-index-nav     : 80;
 
   // option
   --opacity        : .65;

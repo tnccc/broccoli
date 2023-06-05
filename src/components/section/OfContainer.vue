@@ -9,6 +9,6 @@
   max-width     : var(--desktop-width);
   width         : 100%;
   margin-inline : auto;
-  padding-inline: calc(var(--bv) * 4);
+  padding-inline: calc(var(--bv) * 16) calc(var(--bv) * 4);
 }
 </style>

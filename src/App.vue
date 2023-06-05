@@ -4,6 +4,7 @@ import SectionOfTop from '@/components/section/OfTop.vue'
 import SectionOfConcept from '@/components/section/OfConcept.vue'
 import SectionOfMenu from '@/components/section/OfMenu.vue'
 import SectionOfGallery from '@/components/section/OfGallery.vue'
+import SectionOfLocation from '@/components/section/OfLocation.vue'
 </script>
 
 <template>
@@ -11,9 +12,11 @@ import SectionOfGallery from '@/components/section/OfGallery.vue'
     <main :class="$style.main">
       <SectionOfTop :class="$style.top" />
       <SectionOfConcept :class="[$style.concept, $style.margin]" />
-      <SectionOfMenu :class="[$style.concept, $style.margin]"/>
-      <SectionOfGallery :class="[$style.gallery, $style.margin
-    ]"/>
+      <SectionOfMenu :class="[$style.concept, $style.margin]"
+      />
+      <SectionOfGallery :class="[$style.gallery, $style.margin]"/>
+      <SectionOfLocation :class="[$style.location, $style.margin]"/>
+
     </main>
 </template>
 
