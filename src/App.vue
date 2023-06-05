@@ -5,6 +5,7 @@ import SectionOfConcept from '@/components/section/OfConcept.vue'
 import SectionOfMenu from '@/components/section/OfMenu.vue'
 import SectionOfGallery from '@/components/section/OfGallery.vue'
 import SectionOfLocation from '@/components/section/OfLocation.vue'
+import GlobalFooter from '@/components/GlobalFooter.vue'
 </script>
 
 <template>
@@ -16,16 +17,14 @@ import SectionOfLocation from '@/components/section/OfLocation.vue'
       />
       <SectionOfGallery :class="[$style.gallery, $style.margin]"/>
       <SectionOfLocation :class="[$style.location, $style.margin]"/>
-
     </main>
+    <GlobalFooter />
 </template>
 
 <style lang="scss" module>
 .main {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: calc(100dvh - var(--header-height));
 
   .top {
     margin-block-start: calc(var(--bv) * 16);
