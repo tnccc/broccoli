@@ -33,8 +33,8 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
     display: flex;
 
     .title {
-      flex           : 1 1 calc((40% - var(--navigation-width) + 20px));
-      width          : calc((40% - var(--navigation-width) + 20px));
+      flex           : 1 1 calc((40% - var(--navigation-width) + calc(var(--bv) * 10)));
+      width          : calc((40% - var(--navigation-width) + calc(var(--bv) * 10)));
       display        : flex;
       justify-content: center;
       align-items    : center;
