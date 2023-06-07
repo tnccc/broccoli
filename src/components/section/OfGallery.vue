@@ -17,7 +17,7 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
       />
       <div :class="$style.contents">
         <CarouselSlider 
-          :class="$style.slider" 
+          :class="[$style.slider, 'slider']" 
           :sliders="sliderImage"
           :options="{
             type: 'slide',
@@ -28,7 +28,7 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
           }"
         />
         <CarouselSlider 
-          :class="$style.thumbnail"
+          :class="[$style.thumbnail, 'thumbnail']"
           :sliders="thumbnailImage"
           :options="{
             gap: 0,
@@ -36,7 +36,7 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
             pagination: false,
             isNavigation: true,
             direction: 'ttb',
-            heightRatio: 1.5,
+            height: '100%',
             perPage: 4,
           }"
         >
@@ -46,13 +46,63 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
   </section>
 </template>
 
+<style lang="scss">
+.slider {
+
+  .splide__slide {
+    > img {
+      height: 100%;
+    }
+  }
+}
+
+.thumbnail {
+  position: relative;
+  left: calc(var(--bv) * -6);
+
+  .splide__track {
+    overflow: visible;
+  }
+
+  .splide__slide {
+    position: relative;
+
+    &::before {
+      content         : "";
+      width           : 100%;
+      height          : 100%;
+      position        : absolute;
+      top             : 0;
+      left            : 0;
+      background-color: var(--background-filter-color);
+    }
+  }
+
+  .splide__track--ttb > .splide__list {
+    display       : flex;
+    flex-direction: column;
+    gap           : calc(var(--bv) * 2) 0;
+    height        : 100%;
+  }
+  
+  .splide__track--nav>.splide__list>.splide__slide {
+    border: none;
+  }
+
+  .splide__track--nav>.splide__list>.splide__slide.is-active {
+    border: none;
+  }
+}
+</style>
+
 <style lang="scss" module>
 .gallery {
   --slider-width: calc(100% - calc(var(--bv) * 35));
   
   .contents {
     margin-block-start: calc(var(--bv) * 15);
-    display: flex;
+    display           : flex;
+    align-items       : center;
     
     .slider {
       flex : 0 0 var(--slider-width);
