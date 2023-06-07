@@ -1,8 +1,17 @@
 <script setup lang="ts">
+import { 
+  Splide, 
+  SplideSlide,
+} from '@splidejs/vue-splide'
 import '@splidejs/vue-splide/css';
-import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import { imageUrl } from '@/module/imageUtils'
-import { sliderImage } from '@/assets/data/sliderImage'
+
+type Props = {
+  options: {[key: string]: string | boolean | number},
+  sliders: any
+}
+
+const props = defineProps<Props>()
 
 </script>
 
@@ -10,14 +19,11 @@ import { sliderImage } from '@/assets/data/sliderImage'
   <div :class="$style.container">
     <Splide 
       :class="$style.slide"
-      :options="{
-        type: 'slide',
-        arrows: false
-      }"
+      :options="options"
     >
       <SplideSlide
         :class="$style.slider"
-        v-for="item in sliderImage"
+        v-for="item in sliders"
       >
         <img :src="imageUrl(item.image)" alt="item.alt">
       </SplideSlide>
@@ -28,7 +34,5 @@ import { sliderImage } from '@/assets/data/sliderImage'
 <style lang="scss" module>
 .container {
   width: 100%;
-
-  
 }
 </style>
