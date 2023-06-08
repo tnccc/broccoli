@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import SectionOfHeader from '@/components/section/OfHeader.vue'
 import SectionOfContainer from '@/components/section/OfContainer.vue'
 import CarouselSlider from '@/components/CarouselSlider.vue'
 import { sliderImage } from '@/assets/data/sliderImage'
 import { thumbnailImage } from '@/assets/data/thumbnailImage'
+
+const slider = ref({})
+const thumbnailSlider = ref({})
 </script>
 
 <template>
@@ -16,18 +20,24 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
         :ja="'ギャラリー'"
       />
       <div :class="$style.contents">
-        <CarouselSlider 
+        <CarouselSlider
+          :ref="slider" 
           :class="[$style.slider, 'slider']" 
           :sliders="sliderImage"
           :options="{
-            type: 'slide',
+            type: 'loop',
+            autoplay: true,
+            updateOnMove: true,
+            speed: 2000,
             arrows: false,
             direction: 'ttb',
             height: '34rem',
             pagination: false,
+            drag: false,
           }"
         />
         <CarouselSlider 
+          :ref="thumbnailSlider"
           :class="[$style.thumbnail, 'thumbnail']"
           :sliders="thumbnailImage"
           :options="{
@@ -58,6 +68,7 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
 
 .thumbnail {
   position: relative;
+  top: calc(var(--bv) * -1);
   left: calc(var(--bv) * -6);
 
   .splide__track {
@@ -66,6 +77,10 @@ import { thumbnailImage } from '@/assets/data/thumbnailImage'
 
   .splide__slide {
     position: relative;
+    
+    img {
+      border-radius: calc(var(--bv) / 2);
+    }
 
     &::before {
       content         : "";

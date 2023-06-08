@@ -16,10 +16,19 @@ import SectionContainer from '@/components/section/OfContainer.vue'
         <div :class="$style.contents">
           <div>
             <figure :class="$style.image">
-              <img src="@/assets/img/concept_01.png" alt="OPEN">
+              <img
+                src="@/assets/img/concept_01.png"
+                alt="OPEN"
+                loading="lazy"
+                content-visibility="auto"
+              >
             </figure>
             <figure :class="$style.image">
-              <img src="@/assets/img/concept_02.png">
+              <img
+                src="@/assets/img/concept_02.png"
+                loading="lazy"
+                content-visibility="auto"
+              >
             </figure>
             <div :class="$style.text">
               <p>

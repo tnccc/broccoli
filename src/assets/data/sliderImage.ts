@@ -4,15 +4,15 @@ export const sliderImage = [
     alt: 'broccoli'
   },
   {
-    image: 'cafe.jpg',
+    image: 'cafe_02.jpg',
     alt: 'broccoli'
   },
   {
-    image: 'cafe.jpg',
+    image: 'cafe_03.jpg',
     alt: 'broccoli'
   },
   {
-    image: 'cafe.jpg',
+    image: 'cafe_04.jpg',
     alt: 'broccoli'
   }
 ]

@@ -13,7 +13,11 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
         </div>
       </div>
       <figure :class="[$style.image, 'image']">
-        <img src="@/assets/img/mask_02.jpg" alt="">
+        <img
+          src="@/assets/img/mask_02.jpg" alt=""
+          loading="lazy"
+          content-visibility="auto"
+        >
       </figure>
     </SectionOfContainer>
   </section>

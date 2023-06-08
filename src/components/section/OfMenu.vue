@@ -16,13 +16,18 @@ import { imageUrl } from '@/module/imageUtils'
       <div :class="$style.container">
         <div :class="$style.contents">
           <div :class="$style.list">
-            <div 
+            <div
               v-for="item in menus"
               :key="item.name"
               :class="$style.item"
             >
               <figure :class="$style.image">
-                <img :src="imageUrl(item.image)" :alt="item.alt">
+                <img
+                  :src="imageUrl(item.image)"
+                  :alt="item.alt"
+                  loading="lazy"
+                  content-visibility="auto"
+                >
               </figure>
               <div :class="$style.description">
                 <h4>{{ item.name }}</h4>
