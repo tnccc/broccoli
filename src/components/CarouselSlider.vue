@@ -7,6 +7,7 @@ import '@splidejs/vue-splide/css';
 import { imageUrl } from '@/module/imageUtils'
 
 type Props = {
+  sliderRef: 'string',
   options: {[key: string]: string | boolean | number},
   sliders: any,
   width?: string,
@@ -19,7 +20,8 @@ const props = defineProps<Props>()
 
 <template>
   <div :class="$style.container">
-    <Splide 
+    <Splide
+      :ref="sliderRef" 
       :class="$style.slide"
       :options="options"
     >

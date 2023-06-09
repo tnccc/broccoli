@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const navigations = [
+const navigation = [
   {
     path: '/',
     name: 'top'
@@ -26,11 +26,16 @@ const navigations = [
   <nav :class="$style.navigation">
     <ul :class="$style.list">
       <li 
-        v-for="item in navigations"
+        v-for="item in navigation"
         :key="item.name"
         :class="$style.item"
       >
-        <a :class="$style.current" :href="item.path">
+        <a
+          :class="[
+            {isCurrent: $style.current}
+          ]"
+          :href="item.path"
+        >
           <span>{{ item.name }}</span>
         </a>
       </li>

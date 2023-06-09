@@ -24,7 +24,7 @@
 @use '../assets/scss/mixin' as *;
 
 .header {
-  padding       : calc(var(--bv) * 1.5) calc(var(--bv) * 2.5);
+  padding       : calc(var(--bv) * 2) calc(var(--bv) * 2.5);
   position      : relative;
   color         : var(--green);
   letter-spacing: var(--letter-spacing-normal);

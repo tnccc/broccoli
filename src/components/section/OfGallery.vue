@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { Splide } from '@splidejs/vue-splide'
 import SectionOfHeader from '@/components/section/OfHeader.vue'
 import SectionOfContainer from '@/components/section/OfContainer.vue'
 import CarouselSlider from '@/components/CarouselSlider.vue'
 import { sliderImage } from '@/assets/data/sliderImage'
 import { thumbnailImage } from '@/assets/data/thumbnailImage'
 
-const slider = ref({})
-const thumbnailSlider = ref({})
+const mainSlider = ref<InstanceType<typeof Splide>>()
+const thumbnailSliderRef = ref<InstanceType<typeof Splide>>()
+
+onMounted(() => {
+  const thumbnailSlider = thumbnailSliderRef.value?.splide
+  if(thumbnailSlider) {
+    mainSlider.value?.sync(thumbnailSlider)
+  }
+})
 </script>
 
 <template>
@@ -21,7 +29,7 @@ const thumbnailSlider = ref({})
       />
       <div :class="$style.contents">
         <CarouselSlider
-          :ref="slider" 
+          :sliderRef="mainSlider" 
           :class="[$style.slider, 'slider']" 
           :sliders="sliderImage"
           :options="{
@@ -37,7 +45,7 @@ const thumbnailSlider = ref({})
           }"
         />
         <CarouselSlider 
-          :ref="thumbnailSlider"
+          :sliderRef="thumbnailSliderRef"
           :class="[$style.thumbnail, 'thumbnail']"
           :sliders="thumbnailImage"
           :options="{
@@ -45,6 +53,7 @@ const thumbnailSlider = ref({})
             arrows: false,
             pagination: false,
             isNavigation: true,
+            rewind: true,
             direction: 'ttb',
             height: '100%',
             perPage: 4,
