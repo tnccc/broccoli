@@ -1,62 +1,62 @@
-@use 'sass:math';
-@use 'function' as *;
+@use "sass:math";
+@use "function" as *;
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap");
 @import url("https://use.typekit.net/hlf3ofz.css");
 
-:root{
-  --bv           : .5rem;
+:root {
+  --bv: 0.5rem;
   --desktop-width: 1480px;
 
   // color
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #232322;
-  --gray : #D9D9D9;
-  --cream: #F9F8F3;
+  --gray: #d9d9d9;
+  --cream: #f9f8f3;
   --green: #708848;
-  --blue : #757FAE;
-  --background-filter-color: rgba(0, 0, 0, .4);
-  
+  --blue: #757fae;
+  --background-filter-color: rgba(0, 0, 0, 0.4);
+
   // font
   --font-size-small: #{rem(14)};
   --font-size-medium: #{rem(16)};
-  --font-family-main: 'M PLUS Rounded 1c', sans-serif;
-  --font-family-heading  : 'josefin-slab';
-  --letter-spacing-normal: .02em;
-  --line-height-low      : 1;
-  --line-height-normal   : 1.5;
-  
+  --font-family-main: "M PLUS Rounded 1c", sans-serif;
+  --font-family-heading: "josefin-slab";
+  --letter-spacing-normal: 0.02em;
+  --line-height-low: 1;
+  --line-height-normal: 1.5;
+
   // z-index
-  --z-index-min     : 10;
+  --z-index-min: 10;
   --z-index-contents: 50;
-  --z-index-nav     : 80;
+  --z-index-nav: 80;
 
   // option
-  --opacity        : .65;
-  --transition-time: .3s;
+  --opacity: 0.65;
+  --transition-time: 0.3s;
 
   // component
-  --header-height   : #{rem(54)};
-  --footer-height   : #{rem(80)};
+  --header-height: #{rem(54)};
+  --footer-height: #{rem(80)};
   --navigation-width: #{rem(180)};
 }
 
 body {
-  background-color     : var(--cream);
-  font-family          : var(--font-family-main);
-  word-wrap            : break-word;
-  font-feature-settings: 'palt';
+  background-color: var(--cream);
+  font-family: var(--font-family-main);
+  word-wrap: break-word;
+  font-feature-settings: "palt";
 }
 
 ul {
   list-style: none;
   li {
-    margin    : 0;
+    margin: 0;
   }
 }
 
 a {
-  display        : inline-block;
-  color          : inherit;
+  display: inline-block;
+  color: inherit;
   text-decoration: none;
 }
 

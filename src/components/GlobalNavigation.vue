@@ -1,39 +1,17 @@
 <script setup lang="ts">
-const navigation = [
-  {
-    path: '/',
-    name: 'top'
-  },
-  {
-    path: '#concept',
-    name: 'concept'
-  },
-  {
-    path: '#menu',
-    name: 'menu&drink'
-  },
-  {
-    path: '#gallery',
-    name: 'gallery'
-  },
-  {
-    path: '#location',
-    name: 'location'
-  }
-]
+import { navigation } from '@/assets/data/navigation';
+const filteredNavigation = navigation.filter(item => item.name !== 'お問い合わせ' && item.path !== '#contact')
 </script>
 <template>
   <nav :class="$style.navigation">
     <ul :class="$style.list">
-      <li 
-        v-for="item in navigation"
+      <li
+        v-for="item in filteredNavigation"
         :key="item.name"
         :class="$style.item"
       >
         <a
-          :class="[
-            {isCurrent: $style.current}
-          ]"
+          :class="[{isCurrent: $style.current}]"
           :href="item.path"
         >
           <span>{{ item.name }}</span>
@@ -45,10 +23,15 @@ const navigation = [
 
 <style lang="scss" module>
 @use '@/assets/scss/function.scss' as *;
+@use '@/assets/scss/mixin.scss' as *;
 
 .navigation {
   position: fixed;
   left: calcClamp(16, 24, 768, 1440);
+
+  @include mediaScreen('tablet') {
+    display: none;
+  }
 
   .item {
     line-height: var(--line-height-low);

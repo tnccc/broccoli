@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { navigation } from '@/assets/data/navigation'
 
+const isDisplayedNavigation = ref(false)
 </script>
 
 <template>
@@ -12,9 +15,38 @@
         </a>
       </div>
       <div :class="$style.right_column">
-        <a href="/"><span>お問い合わせ</span></a>
-        <a href="/"><span>店舗情報</span></a>
+        <a href="#contact"><span>contact</span></a>
       </div>
+      <button
+        :class="[
+          $style.hamburger,
+          {[$style.open]: isDisplayedNavigation}
+        ]"
+        @click="isDisplayedNavigation = !isDisplayedNavigation"
+      >
+        <span v-for="i in 3" />
+      </button>
+      <nav 
+        :class="[
+          $style.navigation,
+          {[$style.open]: isDisplayedNavigation}
+        ]"
+      >
+        <div :class="$style.navigation_container">
+          <ul :class="$style.list">
+            <li
+              v-for="item in navigation"
+              :class="$style.item"
+              :key="item.name
+              "
+            >
+              <a :href="item.path">
+                {{ item.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
   </header>
 </template>
@@ -42,11 +74,54 @@
     background-position: left bottom;
     background-size    : 12px 2px;
   }
-  
+
+  .hamburger {
+    position: relative;
+    display : none;
+    z-index : var(--z-index-nav);
+
+    @include mediaScreen('tablet') {
+      width          : calc(var(--bv) * 2.5);
+      height         : calc(var(--bv) * 2.5);
+      gap            : calc(var(--bv) / 2);
+      display        : flex;
+      align-items    : center;
+      justify-content: center;
+      flex-direction : column;
+      position       : relative;
+
+      > span {
+        display         : block;
+        width           : 100%;
+        height          : 2px;
+        cursor          : pointer;
+        background-color: var(--green);
+        transition      : all .3s;
+      }
+    }
+
+    &.open {
+      > span {
+        position: absolute;
+
+        &:first-of-type {
+          transform: rotate(-45deg);
+        }
+
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+
+        &:last-of-type {
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
   .container {
     display    : flex;
     align-items: center;
-
     .left_column {
       flex       : 1 0 auto;
       display    : flex;
@@ -74,8 +149,11 @@
         display    : inline-block;
         font-weight: bold;
 
+        > span {
+          text-transform: uppercase;
+        }
+
         &:hover {
-          
           > span {
             &::after {
               width: 100%;
@@ -102,6 +180,55 @@
         + a {
           margin-inline-start: calc(var(--bv) * 3);
         }
+      }
+
+      @include mediaScreen('tablet') {
+        opacity: 0;
+        visibility: hidden;
+
+        &.open {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+
+    .navigation {
+      width     : 100%;
+      height    : 100dvh;
+      position  : fixed;
+      top       : 0;
+      left      : 0;
+      opacity   : 0;
+      visibility: hidden;
+      z-index: var(--z-index-contents);
+
+      &_container {
+        height          : 100%;
+        display         : flex;
+        flex-direction  : column;
+        align-items     : center;
+        justify-content : center;
+        background-color: var(--white);
+
+        .list {
+          li {
+            > a {
+              font-size     : calcClamp(16, 32, 420, 768);
+              font-weight   : bold;
+              text-transform: uppercase;
+            }
+
+            + li {
+              margin-block-start: calc(var(--bv) * 2);
+            }
+          }
+        }
+      }
+
+      &.open {
+        opacity   : 1;
+        visibility: visible;
       }
     }
   }

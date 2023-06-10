@@ -7,14 +7,15 @@ import '@splidejs/vue-splide/css';
 import { imageUrl } from '@/module/imageUtils'
 
 type Props = {
-  sliderRef: 'string',
   options: {[key: string]: string | boolean | number},
   sliders: any,
+  sliderRef: any,
   width?: string,
   height?: string
 }
 
 const props = defineProps<Props>()
+console.log(props.sliderRef)
 
 </script>
 
