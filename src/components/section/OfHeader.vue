@@ -20,6 +20,7 @@ const props = defineProps<Props>()
 
 <style lang="scss" module>
 @use '@/assets/scss/function' as *;
+@use '@/assets/scss/mixin' as *;
 
 h2 {
   display       : flex;
@@ -34,8 +35,12 @@ h2 {
   }
 
   .en {
-    font-size: calcClamp(50, 88, 740, 1440);;
+    font-size: calcClamp(50, 88, 740, 1440);
     font-family: var(--font-family-heading);
+
+    @include mediaScreen('tablet') {
+      font-size: calcClamp(30, 50, 375, 767);
+    }
 
     > span {
       display: inline;
@@ -46,7 +51,11 @@ h2 {
   }
 
   .ja {
-    font-size: calc(var(--bv) * 2.5);
+    font-size: rem(20);
+
+    @include mediaScreen('tablet') {
+      font-size: rem(14);
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { navigation } from '@/assets/data/navigation'
+import { imageUrl } from '@/module/imageUtils'
 
 const isDisplayedNavigation = ref(false)
 </script>
@@ -42,6 +43,10 @@ const isDisplayedNavigation = ref(false)
             >
               <a :href="item.path">
                 {{ item.name }}
+                <img 
+                  v-if="item.path === 'instagram.png'"
+                  :src="imageUrl(item.path)" :alt="item.alt"
+                >
               </a>
             </li>
           </ul>
@@ -141,6 +146,12 @@ const isDisplayedNavigation = ref(false)
         &:hover {
           opacity: var(--opacity);
         }
+
+        @include mediaScreen('tablet') {
+          > img {
+            display: none;
+          }
+        }
       }
     }
 
@@ -201,7 +212,8 @@ const isDisplayedNavigation = ref(false)
       left      : 0;
       opacity   : 0;
       visibility: hidden;
-      z-index: var(--z-index-contents);
+      transition: all var(--transition-time);
+      z-index   : var(--z-index-contents);
 
       &_container {
         height          : 100%;

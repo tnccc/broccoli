@@ -18,6 +18,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
 
 <style lang="scss" module>
 @use '@/assets/scss/function.scss' as *;
+@use '@/assets/scss/mixin.scss' as *;
 
 .location {
   --background-height: calc(var(--bv) * 75);
@@ -42,12 +43,17 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       color      : var(--white);
       gap: calc(var(--bv) * 3) 0;
 
+      @include mediaScreen('tablet') {
+        font-size: calcClamp(30, 80, 375, 767);
+        gap: calc(var(--bv) * 2);
+      }
+
       &::before {
         content         : "";
         display         : block;
         margin-inline   : auto;
-        width           : calc(var(--bv) * 9);
-        height          : calc(var(--bv) * 9);
+        width           : calcClamp(28, 72, 375, 767);
+        height          : calcClamp(28, 72, 375, 767);
         background-image: url(@/assets/img/svg/pin.svg);
         background-size : cover;
       }

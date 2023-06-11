@@ -24,16 +24,26 @@ import SectionOfLocation from '@/components/section/OfLocation.vue'
 </template>
 
 <style lang="scss" module>
+@use '@/assets/scss/mixin' as *;
+
 .main {
   display: flex;
   flex-direction: column;
 
   .top {
     margin-block-start: calc(var(--bv) * 16);
+
+    @include mediaScreen('tablet') {
+      margin-block-start: calc(var(--bv) * 5);
+    }
   }
 
   .margin {
     margin-block-start: calc(var(--bv) * 22);
+
+    @include mediaScreen('tablet') {
+      margin-block-start: calc(var(--bv) * 5);
+    }
   }
 }
 </style>

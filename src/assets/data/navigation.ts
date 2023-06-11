@@ -23,4 +23,8 @@ export const navigation = [
     path: '#contact',
     name: 'contact'
   },
+  {
+    path: 'instagram.png',
+    alt: 'instagram'
+  },
 ]

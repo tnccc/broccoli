@@ -15,21 +15,23 @@ import SectionContainer from '@/components/section/OfContainer.vue'
       <div :class="$style.container">
         <div :class="$style.contents">
           <div>
-            <figure :class="$style.image">
-              <img
-                src="@/assets/img/concept_01.png"
-                alt="OPEN"
-                loading="lazy"
-                content-visibility="auto"
-              >
-            </figure>
-            <figure :class="$style.image">
-              <img
-                src="@/assets/img/concept_02.png"
-                loading="lazy"
-                content-visibility="auto"
-              >
-            </figure>
+            <div :class="$style.image">
+              <figure :class="$style.figure">
+                <img
+                  src="@/assets/img/concept_01.png"
+                  alt="OPEN"
+                  loading="lazy"
+                  content-visibility="auto"
+                >
+              </figure>
+              <figure :class="$style.figure">
+                <img
+                  src="@/assets/img/concept_02.png"
+                  loading="lazy"
+                  content-visibility="auto"
+                >
+              </figure>
+            </div>
             <div :class="$style.text">
               <p>
                 「Broccoli」へようこそ！オシャレなランチやカフェ体験を求めるあなたにぴったりの場所です。私たちは、美意識の高い女性に向けて、心地よい空間と美味しい料理を提供しています。
@@ -45,37 +47,69 @@ import SectionContainer from '@/components/section/OfContainer.vue'
 
 <style lang="scss" module>
 @use '@/assets/scss/function.scss' as *;
+@use '@/assets/scss/mixin.scss' as *;
 
 .concept {
   --margin-image: calc(var(--bv) * 8);
   --margin-text : calc(var(--bv) * 16);
+
+  @include mediaScreen('tablet') {
+    --margin-text: calc(var(--bv) * 5)
+  }
   
   .container {
-    margin-top: calc(var(--bv) * 12);
+    margin-block-start: calc(var(--bv) * 12);
+
+    @include mediaScreen('tablet') {
+      margin-block-start: calc(var(--bv) * 5);
+    }
 
     .contents {
-      margin-top: calc(var(--bv) * 8);
+      margin-block-start: calc(var(--bv) * 8);
+
+      @include mediaScreen('tablet') {
+        margin-block-start: 0;
+      }
 
       > div {
         display        : flex;
         justify-content: center;
         gap: 0 calc(var(--bv) * 4);
 
-        > * {
-          flex     : 1 1 calc(var(--bv) * 40);
-          max-width: calc(var(--bv) * 40);
+        @include mediaScreen('tablet') {
+          flex-direction: column;
         }
-        
+
         .text {
+          flex              : 1 1 calc(var(--bv) * 40);
+          max-width         : calc(var(--bv) * 40);
           margin-block-start: var(--margin-text);
-          font-size: calcClamp(12, 16, 1480, 768);
+          font-size         : calcClamp(12, 16, 1480, 768);
           text-align        : justify;
           line-height       : 2;
+
+          @include mediaScreen('tablet') {
+            flex: 0 0 auto;
+            max-width: none;
+            font-size: rem(14);
+          }
         }
 
         .image {
-          &:last-of-type {
-            margin-block-start: var(--margin-image);
+          display: flex;
+          gap    : 0 calc(var(--bv) * 4);
+
+          @include mediaScreen('tablet') {
+            gap: 0 calc(var(--bv) * 2);
+          }
+
+          .figure {
+            flex     : 1 1 calc(var(--bv) * 40);
+            max-width: calc(var(--bv) * 40);
+
+            &:last-of-type {
+              margin-block-start: var(--margin-image);
+            }
           }
         }
       }
