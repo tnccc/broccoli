@@ -42,32 +42,58 @@ import { imageUrl } from '@/module/imageUtils'
 </template>
 
 <style lang="scss" module>
+@use '@/assets/scss/mixin.scss' as *;
+
 .menu {
+  --menu-column: 4;
+
+  @include mediaScreen('tablet') {
+    --menu-column: 2;
+  }
+
+  @include mediaScreen('mobile') {
+    --menu-column: 1;
+  }
+
   .container {
-    margin-top: calc(var(--bv) * 12);
+    margin-block-start: calc(var(--bv) * 12);
+
+    @include mediaScreen('mobile') {
+      margin-block-start: calc(var(--bv) * 5);
+    }
 
     .contents {
+
       .list {
-        display: flex;
-        gap: 0 calc(var(--bv) * 3);
+        display  : flex;
+        flex-wrap: wrap;
+        gap      : calc(var(--bv) * 3);
+
+        @include mediaScreen('mobile') {
+          gap: var(--bv);
+        }
   
         .item {
-          flex: 1 0 calc((100% / 4) - calc(var(--bv) * 6));
-          width: calc((100% / 4) - calc(var(--bv) * 6));
+          flex: 1 0 calc((100% / var(--menu-column)) - calc(var(--bv) * 6));
+          width: calc((100% / var(--menu-column)) - calc(var(--bv) * 6));
         }
 
         .description {
           line-height: var(--line-height-low);
 
           > h4 {
-            margin-block-start: calc(var(--bv) * 1);
+            margin-block-start: var(--bv);
             color     : var(--blue);
           }
 
           > p {
-            margin-block-start: calc(var(--bv) * 1);
+            margin-block-start: var(--bv);
             font-size         : var(--font-size-small);
             line-height       : calc(var(--line-height-normal) + .2);
+
+            @include mediaScreen('tablet') {
+              font-size: var(--font-size-min);
+            }
           }
         }
   

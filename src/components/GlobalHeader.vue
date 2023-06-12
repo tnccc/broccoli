@@ -134,7 +134,7 @@ const isDisplayedNavigation = ref(false)
       gap        : 0 calc(var(--bv) * 6);
 
       > h1 {
-        font-size : rem(20);
+        font-size : rem(20); //仮で設定しています
         transition: opacity var(--transition-time);
       }
 

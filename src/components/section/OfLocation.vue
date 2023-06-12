@@ -23,6 +23,14 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
 .location {
   --background-height: calc(var(--bv) * 75);
   --filter-shadow: rgba(0, 0, 0, .5);
+
+  @include mediaScreen('tablet') {
+    --background-height: calc(var(--bv) * 50);
+  }
+
+  @include mediaScreen('mobile') {
+    --background-height: calc(var(--bv) * 30);
+  }
   
   .background {
     width           : 100%;
@@ -88,7 +96,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       ;
       
       > span {
-        font-size: rem(14);
+        font-size: var(--font-size-small);
       }
 
       &:hover {

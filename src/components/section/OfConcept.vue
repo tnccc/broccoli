@@ -84,14 +84,14 @@ import SectionContainer from '@/components/section/OfContainer.vue'
           flex              : 1 1 calc(var(--bv) * 40);
           max-width         : calc(var(--bv) * 40);
           margin-block-start: var(--margin-text);
-          font-size         : calcClamp(12, 16, 1480, 768);
+          font-size         : calcClamp(12, 16, 768, 1480);
           text-align        : justify;
           line-height       : 2;
 
           @include mediaScreen('tablet') {
             flex: 0 0 auto;
             max-width: none;
-            font-size: rem(14);
+            font-size: var(--font-size-small);
           }
         }
 

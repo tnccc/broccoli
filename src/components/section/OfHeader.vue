@@ -23,6 +23,7 @@ const props = defineProps<Props>()
 @use '@/assets/scss/mixin' as *;
 
 h2 {
+  --font-size-ja: #{rem(20)};
   display       : flex;
   flex-direction: column;
   &.right {
@@ -51,10 +52,10 @@ h2 {
   }
 
   .ja {
-    font-size: rem(20);
+    font-size: var(--font-size-ja);
 
     @include mediaScreen('tablet') {
-      font-size: rem(14);
+      font-size: var(--font-size-small);
     }
   }
 }

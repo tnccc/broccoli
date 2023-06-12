@@ -42,7 +42,7 @@ const filteredNavigation = navigation.filter(item => item.name !== 'お問い合
 
     > a {
       position      : relative;
-      font-size     : rem(12);
+      font-size     : var(--font-size-min);
       font-weight   : bold;
       color         : var(--blue);
       text-transform: uppercase;
