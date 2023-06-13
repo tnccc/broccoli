@@ -21,28 +21,36 @@ const navigationElements = ref<NodeListOf<HTMLElement> | null>()
 
 onMounted(() => {
   elements.value = document.querySelectorAll('.element')
-  console.log(elements.value)
+  navigationElements.value = document.querySelectorAll('.item[data]')
+  const classNames = {
+    data: 'data',
+    remove: 'concept',
+    removeSecond: 'top'
+  };
+  intersectionObserver(navigationElements.value, elements.value, options, classNames)
 })
 </script>
 
 <template>
   <GlobalHeader />
-  <GlobalNavigation />
+  <GlobalNavigation
+    :navigationElements="navigationElements"
+  />
   <main :class="$style.main">
     <SectionOfTop 
-      :class="[$style.top, 'element']"
+      :class="[$style.top, 'element', 'top']"
     />
     <SectionOfConcept
-      :class="[$style.concept, $style.margin, 'element']"
+      :class="[$style.concept, $style.margin, 'concept element']"
     />
     <SectionOfMenu
-      :class="[$style.concept, $style.margin, 'element']"
+      :class="[$style.concept, $style.margin, 'menu element']"
     />
     <SectionOfGallery
-      :class="[$style.gallery, $style.margin, 'element']"
+      :class="[$style.gallery, $style.margin, 'gallery element']"
     />
     <SectionOfLocation
-      :class="[$style.location, $style.margin, 'element']"
+      :class="[$style.location, $style.margin, 'location element']"
     />
   </main>
   <GlobalFooter />

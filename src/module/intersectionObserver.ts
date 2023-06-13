@@ -1,13 +1,21 @@
-export const intersectionObserver = (elements: any, options: any) => {
+export const intersectionObserver = (
+  elements: any,
+  target: any,
+  options: any,
+  classNames: { data: string, remove: string, removeSecond: string }
+) => {
+  const { data, remove, removeSecond } = classNames
   const callback =  ((entries: any) => {
     entries.forEach((entry: any) => {
+      console.log(entries)
       if(entry.isIntersecting) {
         elements.forEach((el: any) => {
-          const currentElement = el.getAttribute('element')
+          const currentElement = el.getAttribute(data)
+          console.log(currentElement !== null && entry.target.classList.contains(currentElement))
           if(currentElement !== null && entry.target.classList.contains(currentElement)) {
             el.classList.add('current')
           } else {
-            if(!entry.target.classList.contains('')) {
+            if(!entry.target.classList.contains(remove) || !entry.target.classList.contains(removeSecond)) {
               el.classList.remove('current')
             }
           }
@@ -16,7 +24,7 @@ export const intersectionObserver = (elements: any, options: any) => {
     })
   })
   const observer = new IntersectionObserver(callback, options)
-  elements.forEach((el: any) => {
+  target.forEach((el: any) => {
     observer.observe(el)
   })
 }
