@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 import GlobalNavigation from './components/GlobalNavigation.vue'
@@ -7,20 +8,44 @@ import SectionOfConcept from '@/components/section/OfConcept.vue'
 import SectionOfMenu from '@/components/section/OfMenu.vue'
 import SectionOfGallery from '@/components/section/OfGallery.vue'
 import SectionOfLocation from '@/components/section/OfLocation.vue'
+import { intersectionObserver } from './module/intersectionObserver'
+
+//監視する要素を取得
+const elements = ref<NodeListOf<HTMLElement>>()
+const navigationElements = ref<NodeListOf<HTMLElement> | null>()
+  const options = {
+  root      : null,
+  rootMargin: '-50% 0px',
+  threshold : 0,
+}
+
+onMounted(() => {
+  elements.value = document.querySelectorAll('.element')
+  console.log(elements.value)
+})
 </script>
 
 <template>
-    <GlobalHeader />
-    <GlobalNavigation />
-    <main :class="$style.main">
-      <SectionOfTop :class="$style.top" />
-      <SectionOfConcept :class="[$style.concept, $style.margin]" />
-      <SectionOfMenu :class="[$style.concept, $style.margin]"
-      />
-      <SectionOfGallery :class="[$style.gallery, $style.margin]"/>
-      <SectionOfLocation :class="[$style.location, $style.margin]"/>
-    </main>
-    <GlobalFooter />
+  <GlobalHeader />
+  <GlobalNavigation />
+  <main :class="$style.main">
+    <SectionOfTop 
+      :class="[$style.top, 'element']"
+    />
+    <SectionOfConcept
+      :class="[$style.concept, $style.margin, 'element']"
+    />
+    <SectionOfMenu
+      :class="[$style.concept, $style.margin, 'element']"
+    />
+    <SectionOfGallery
+      :class="[$style.gallery, $style.margin, 'element']"
+    />
+    <SectionOfLocation
+      :class="[$style.location, $style.margin, 'element']"
+    />
+  </main>
+  <GlobalFooter />
 </template>
 
 <style lang="scss" module>
