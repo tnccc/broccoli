@@ -1,6 +1,6 @@
 export const navigation = [
   {
-    path: '/',
+    path: '#top',
     data: 'top',
     name: 'top'
   },

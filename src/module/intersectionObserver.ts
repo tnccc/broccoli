@@ -7,11 +7,9 @@ export const intersectionObserver = (
   const { data, remove, removeSecond } = classNames
   const callback =  ((entries: any) => {
     entries.forEach((entry: any) => {
-      console.log(entries)
       if(entry.isIntersecting) {
         elements.forEach((el: any) => {
           const currentElement = el.getAttribute(data)
-          console.log(currentElement !== null && entry.target.classList.contains(currentElement))
           if(currentElement !== null && entry.target.classList.contains(currentElement)) {
             el.classList.add('current')
           } else {

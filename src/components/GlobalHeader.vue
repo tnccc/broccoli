@@ -7,7 +7,7 @@ const isDisplayedNavigation = ref(false)
 </script>
 
 <template>
-  <header :class="$style.header">
+  <header id="header" :class="$style.header">
     <div :class="$style.container">
       <div :class="$style.left_column">
         <h1>Broccoli</h1>

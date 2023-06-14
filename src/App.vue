@@ -38,18 +38,23 @@ onMounted(() => {
   />
   <main :class="$style.main">
     <SectionOfTop 
+      id="top"
       :class="[$style.top, 'element', 'top']"
     />
     <SectionOfConcept
+      id="concept"
       :class="[$style.concept, $style.margin, 'concept element']"
     />
     <SectionOfMenu
+      id="menu"
       :class="[$style.concept, $style.margin, 'menu element']"
     />
     <SectionOfGallery
+      id="gallery"
       :class="[$style.gallery, $style.margin, 'gallery element']"
     />
     <SectionOfLocation
+      id="location"
       :class="[$style.location, $style.margin, 'location element']"
     />
   </main>

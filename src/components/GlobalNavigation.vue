@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { navigation } from '@/assets/data/navigation';
+import { handleError } from 'vue';
 
 type Props = {
   navigationElements: any
@@ -9,6 +10,16 @@ const props = defineProps<Props>()
 
 const filteredNavigation = navigation.filter(item => item.name !== 'お問い合わせ' && item.path !== '#contact')
 
+const scrollToSection = (sectionId: string) => {
+  const targetElement = document.getElementById(sectionId)
+  const top = document.getElementById('top')
+  if(targetElement) {
+    window.scrollTo({
+      top     : targetElement === top ? 0 : targetElement.offsetTop,
+      behavior: 'smooth',
+    })
+  } 
+}
 </script>
 <template>
   <nav :class="$style.navigation">
@@ -19,7 +30,10 @@ const filteredNavigation = navigation.filter(item => item.name !== 'お問い合
         :class="[$style.item, 'item']"
         :data="item.data"
       >
-        <a :href="item.path">
+        <a
+          :href="item.path"
+          @click.prevent="scrollToSection(item.path.replace('#', ''))"
+        >
           <span>{{ item.name }}</span>
         </a>
       </li>
