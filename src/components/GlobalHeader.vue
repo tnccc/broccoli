@@ -1,9 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { navigation } from '@/assets/data/navigation'
 import { imageUrl } from '@/module/imageUtils'
 
+type Props = {
+  navigationStatus: boolean
+}
+
+const props = defineProps<Props>()
 const isDisplayedNavigation = ref(false)
+watch(() => props.navigationStatus, (newStatus) => {
+  isDisplayedNavigation.value = newStatus
+  console.log(props.navigationStatus)
+  console.log(newStatus)
+})
+
+console.log(props.navigationStatus)
+const toggleNavigation = () => {
+  isDisplayedNavigation.value = !isDisplayedNavigation.value
+}
 </script>
 
 <template>
@@ -23,7 +38,7 @@ const isDisplayedNavigation = ref(false)
           $style.hamburger,
           {[$style.open]: isDisplayedNavigation}
         ]"
-        @click="isDisplayedNavigation = !isDisplayedNavigation"
+        @click="toggleNavigation"
       >
         <span v-for="i in 3" />
       </button>

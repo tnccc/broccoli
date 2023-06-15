@@ -19,27 +19,34 @@ const navigationElements = ref<NodeListOf<HTMLElement> | null>()
   threshold : 0,
 }
 
+const navigationStatus = ref(true)
+const calculateWindowWidth = computed(() => {
+  const display = window.innerWidth
+  return display
+})
 //①GlobalNavigationで押下されたIDを親に伝えてスクロールを処理を行う
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
   if(targetElement) {
-    window.scrollTo({
-      top     : targetElement === top ? 0 : targetElement.offsetTop,
-      behavior: 'smooth',
-    })
-  } 
+    if(calculateWindowWidth.value >= 768) {
+      window.scrollTo({
+        top     : targetElement === top ? 0 : targetElement.offsetTop,
+        behavior: 'smooth',
+      })
+      navigationStatus.value = false
+    } else {
+      window.scrollTo({
+        top     : targetElement === top ? 0 : targetElement.offsetTop,
+        behavior: 'smooth',
+      })
+    }
+  }
 }
+
 //②画面幅を監視するメソッドを用意
 //③scrollが実行されたら、GlobalHeaderのナビゲーションフラグをfalseにする
 //④
-const calculateWindowWidth = computed(() => {
-  if(window.innerWidth >= 768 ) {
-    
-  }
-})
-
-
 
 onMounted(() => {
   elements.value = document.querySelectorAll('.element')
@@ -58,6 +65,7 @@ onMounted(() => {
   <GlobalNavigation
     @scrollToSection="scrollToSection"
     :navigationElements="navigationElements"
+    :navigationStatus="navigationStatus"
   />
   <main :class="$style.main">
     <SectionOfTop 
