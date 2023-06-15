@@ -91,7 +91,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
           @include mediaScreen('tablet') {
             flex: 0 0 auto;
             max-width: none;
-            font-size: var(--font-size-small);
+            font-size: var(--fs-small);
           }
         }
 

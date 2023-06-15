@@ -1,24 +1,21 @@
 <script setup lang="ts">
 import { navigation } from '@/assets/data/navigation';
-import { handleError } from 'vue';
+import { emit } from 'process';
+type Emits = {
+  (e: string, sectionId: string): void
+}
 
 type Props = {
   navigationElements: any
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<Emits>()
 
 const filteredNavigation = navigation.filter(item => item.name !== 'お問い合わせ' && item.path !== '#contact')
 
-const scrollToSection = (sectionId: string) => {
-  const targetElement = document.getElementById(sectionId)
-  const top = document.getElementById('top')
-  if(targetElement) {
-    window.scrollTo({
-      top     : targetElement === top ? 0 : targetElement.offsetTop,
-      behavior: 'smooth',
-    })
-  } 
+const smoothScroll = (sectionId: any) => {
+  emit('scrollToSection', sectionId)
 }
 </script>
 <template>
@@ -32,7 +29,7 @@ const scrollToSection = (sectionId: string) => {
       >
         <a
           :href="item.path"
-          @click.prevent="scrollToSection(item.path.replace('#', ''))"
+          @click.prevent="smoothScroll(item.path.replace('#', ''))"
         >
           <span>{{ item.name }}</span>
         </a>
@@ -94,7 +91,7 @@ const scrollToSection = (sectionId: string) => {
 
     > a {
       position      : relative;
-      font-size     : var(--font-size-min);
+      font-size     : var(--fs-min);
       font-weight   : bold;
       color         : var(--blue);
       text-transform: uppercase;

@@ -61,10 +61,19 @@ const isDisplayedNavigation = ref(false)
 @use '../assets/scss/mixin' as *;
 
 .header {
-  padding       : calc(var(--bv) * 2) calc(var(--bv) * 2.5);
-  position      : relative;
-  color         : var(--green);
-  letter-spacing: var(--letter-spacing-normal);
+  padding         : calc(var(--bv) * 2) calc(var(--bv) * 2.5);
+  position        : relative;
+  color           : var(--green);
+  letter-spacing  : var(--letter-spacing-normal);
+  background-color: var(--cream);
+
+  @include mediaScreen('tablet') {
+    width   : 100%;
+    padding : calc(var(--bv) * 1.5) calc(var(--bv) * 2);
+    position: fixed;
+    top     : 0;
+    z-index: var(--z-index-nav);
+  }
 
   &::after {
     content            : "";

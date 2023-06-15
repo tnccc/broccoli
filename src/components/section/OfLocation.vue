@@ -96,7 +96,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       ;
       
       > span {
-        font-size: var(--font-size-small);
+        font-size: var(--fs-small);
       }
 
       &:hover {

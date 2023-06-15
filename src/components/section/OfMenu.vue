@@ -88,11 +88,11 @@ import { imageUrl } from '@/module/imageUtils'
 
           > p {
             margin-block-start: var(--bv);
-            font-size         : var(--font-size-small);
+            font-size         : var(--fs-small);
             line-height       : calc(var(--line-height-normal) + .2);
 
             @include mediaScreen('tablet') {
-              font-size: var(--font-size-min);
+              font-size: var(--fs-min);
             }
           }
         }
