@@ -10,7 +10,6 @@ import SectionOfGallery from '@/components/section/OfGallery.vue'
 import SectionOfLocation from '@/components/section/OfLocation.vue'
 import { intersectionObserver } from './module/intersectionObserver'
 
-//監視する要素を取得
 const elements = ref<NodeListOf<HTMLElement>>()
 const navigationElements = ref<NodeListOf<HTMLElement> | null>()
   const options = {
@@ -24,25 +23,29 @@ const calculateWindowWidth = computed(() => {
   const display = window.innerWidth
   return display
 })
-//①GlobalNavigationで押下されたIDを親に伝えてスクロールを処理を行う
+
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
   if(targetElement) {
-    if(calculateWindowWidth.value >= 768) {
-      window.scrollTo({
+    window.scrollTo({
         top     : targetElement === top ? 0 : targetElement.offsetTop,
         behavior: 'smooth',
-      })
-      navigationStatus.value = false
-    } else {
-      window.scrollTo({
-        top     : targetElement === top ? 0 : targetElement.offsetTop,
-        behavior: 'smooth',
-      })
-    }
+    })
   }
 }
+
+const scrollHandler = (sectionId: string) => {
+  if(calculateWindowWidth.value <= 768) {
+    scrollToSection(sectionId)
+    navigationStatus.value = false
+    console.log(sectionId)
+  } else {
+    scrollToSection(sectionId)
+    console.log('desktop')
+  }
+}
+
 
 //②画面幅を監視するメソッドを用意
 //③scrollが実行されたら、GlobalHeaderのナビゲーションフラグをfalseにする
@@ -63,11 +66,12 @@ onMounted(() => {
 <template>
   <GlobalHeader />
   <GlobalNavigation
-    @scrollToSection="scrollToSection"
+    @scrollToSection="scrollHandler"
     :navigationElements="navigationElements"
     :navigationStatus="navigationStatus"
   />
   <main :class="$style.main">
+    {{ calculateWindowWidth }}
     <SectionOfTop 
       id="top"
       :class="[$style.top, 'element', 'top']"
@@ -100,7 +104,7 @@ onMounted(() => {
   flex-direction: column;
 
   @include mediaScreen('tablet') {
-    margin-block-start: calc(var(--bv) * 5);
+    margin-block-start: var(--header-height);
   }
 
   .top {

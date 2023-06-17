@@ -1,21 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { Splide } from '@splidejs/vue-splide'
 import SectionOfHeader from '@/components/section/OfHeader.vue'
 import SectionOfContainer from '@/components/section/OfContainer.vue'
 import CarouselSlider from '@/components/CarouselSlider.vue'
 import { sliderImage } from '@/assets/data/sliderImage'
-import { thumbnailImage } from '@/assets/data/thumbnailImage'
-
-const mainSlider = ref<InstanceType<typeof Splide>>()
-const thumbnailSliderRef = ref<InstanceType<typeof Splide>>()
-
-onMounted(() => {
-  const thumbnailSlider = thumbnailSliderRef.value?.splide
-  if(thumbnailSlider) {
-    mainSlider.value?.sync(thumbnailSlider)
-  }
-})
 </script>
 
 <template>
@@ -29,37 +16,18 @@ onMounted(() => {
       />
       <div :class="$style.contents">
         <CarouselSlider
-          :sliderRef="mainSlider" 
           :class="[$style.slider, 'slider']" 
           :sliders="sliderImage"
           :options="{
             type: 'loop',
+            rewind: true,
             autoplay: true,
-            updateOnMove: true,
             speed: 2000,
             arrows: false,
-            direction: 'ttb',
-            height: '34rem',
             pagination: false,
-            drag: false,
+            drag: true,
           }"
         />
-        <CarouselSlider 
-          :sliderRef="thumbnailSliderRef"
-          :class="[$style.thumbnail, 'thumbnail']"
-          :sliders="thumbnailImage"
-          :options="{
-            gap: 0,
-            arrows: false,
-            pagination: false,
-            isNavigation: true,
-            rewind: true,
-            direction: 'ttb',
-            height: '100%',
-            perPage: 4,
-          }"
-        >
-        </CarouselSlider>
       </div>
     </SectionOfContainer>
   </section>
@@ -121,11 +89,12 @@ onMounted(() => {
 
 <style lang="scss" module>
 .gallery {
-  --slider-width: calc(100% - calc(var(--bv) * 35));
+  --slider-width: calc(100% - calc(var(--bv) * 30));
   
   .contents {
     margin-block-start: calc(var(--bv) * 15);
     display           : flex;
+    justify-content   : center;
     align-items       : center;
     
     .slider {

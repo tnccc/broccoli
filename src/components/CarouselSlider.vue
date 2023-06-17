@@ -2,51 +2,70 @@
 import { 
   Splide, 
   SplideSlide,
+  SplideTrack
 } from '@splidejs/vue-splide'
 import '@splidejs/vue-splide/css';
 import { imageUrl } from '@/module/imageUtils'
+import { ref ,onMounted } from 'vue';
 
 type Props = {
   options: {[key: string]: string | boolean | number},
   sliders: any,
-  sliderRef: any,
   width?: string,
   height?: string
 }
 
 const props = defineProps<Props>()
-console.log(props.sliderRef)
+const splide = ref()
 
+onMounted(() => {
+
+  if( splide.value && splide.value.splide ) {
+    console.log(splide.value.splide.length)
+  }
+})
 </script>
 
 <template>
   <div :class="$style.container">
     <Splide
-      :ref="sliderRef" 
+      ref="splide" 
       :class="$style.slide"
       :options="options"
+      :has-track="false"
     >
-      <SplideSlide
-        :class="$style.slider"
-        v-for="item in sliders"
-      >
-        <figure :class="$style.figure">
-          <img
-            :src="imageUrl(item.image)" 
-            :alt="item.alt"
-            :width="width"
-            :height="height"
-            loading="lazy"
-            content-visibility="auto"
-          >
-        </figure>
-        <div :class="$style.description">
-          <h2></h2>
+      <SplideTrack>
+        <SplideSlide
+          :class="$style.slider"
+          v-for="item in sliders"
+        >
+          <figure :class="$style.figure">
+            <img
+              :src="imageUrl(item.image)" 
+              :alt="item.alt"
+              :width="width"
+              :height="height"
+              loading="lazy"
+              content-visibility="auto"
+            >
+          </figure>
+        </SplideSlide>
+      </SplideTrack>
+      <div class="splide__progress">
+        <div class="splide__progress__bar">
         </div>
-      </SplideSlide>
+      </div>
     </Splide>
   </div>
 </template>
+
+<style lang="scss">
+.splide__progress {
+  &__bar {
+    background-color: var(--blue);
+  }
+}
+</style>
 
 <style lang="scss" module>
 @use '@/assets/scss/function.scss' as *;
@@ -56,9 +75,11 @@ console.log(props.sliderRef)
 
   .figure {
     position: relative;
+    height  : 100%;
 
     > img {
-      width: 100%;
+      width     : 100%;
+      height    : 100%;
       object-fit: cover;
     }
   }

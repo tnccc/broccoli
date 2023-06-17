@@ -17,6 +17,7 @@ const filteredNavigation = navigation.filter(item => item.name !== 'お問い合
 const smoothScroll = (sectionId: any) => {
   emit('scrollToSection', sectionId)
 }
+
 </script>
 <template>
   <nav :class="$style.navigation">
