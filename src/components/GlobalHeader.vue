@@ -25,7 +25,7 @@ const toggleNavigation = () => {
   <header id="header" :class="$style.header">
     <div :class="$style.container">
       <div :class="$style.left_column">
-        <h1>Broccoli</h1>
+        <h1><img src="@/assets/img/svg/logo.svg" alt="broccoli"></h1>
         <a href="/">
           <img src="@/assets/img/instagram.png" alt="instagram">
         </a>
@@ -158,7 +158,7 @@ const toggleNavigation = () => {
       gap        : 0 calc(var(--bv) * 6);
 
       > h1 {
-        font-size : rem(20); //仮で設定しています
+        width     : calc(var(--bv) * 10);
         transition: opacity var(--transition-time);
       }
 

@@ -88,14 +88,23 @@ import { sliderImage } from '@/assets/data/sliderImage'
 </style>
 
 <style lang="scss" module>
+@use '@/assets/scss/mixin.scss' as *;
+
 .gallery {
   --slider-width: calc(100% - calc(var(--bv) * 30));
+  @include mediaScreen('tablet') {
+    --slider-width: 100%;
+  }
   
   .contents {
     margin-block-start: calc(var(--bv) * 15);
     display           : flex;
     justify-content   : center;
     align-items       : center;
+
+    @include mediaScreen('tablet') {
+      margin-block-start: calc(var(--bv) * 5);
+    }
     
     .slider {
       flex : 0 0 var(--slider-width);

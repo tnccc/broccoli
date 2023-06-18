@@ -58,7 +58,7 @@ import { imageUrl } from '@/module/imageUtils'
   .container {
     margin-block-start: calc(var(--bv) * 12);
 
-    @include mediaScreen('mobile') {
+    @include mediaScreen('tablet') {
       margin-block-start: calc(var(--bv) * 5);
     }
 
