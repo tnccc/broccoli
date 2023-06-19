@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, nextTick } from 'vue'
+import { gsap, Power4, Circ } from 'gsap'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 import GlobalNavigation from '@/components/GlobalNavigation.vue'
@@ -10,19 +11,55 @@ import SectionOfGallery from '@/components/section/OfGallery.vue'
 import SectionOfLocation from '@/components/section/OfLocation.vue'
 import { intersectionObserver } from '@/module/intersectionObserver'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
-LoadingAnimation
 
 const isLoadingDisplay = ref(true)
 const navigationStatus = ref(true)
 const elements = ref<NodeListOf<HTMLElement>>()
 
+const notScroll = (e) => {
+  e.preventDefault()
+}
+
 const loadingAnimation = () => {
+  document.addEventListener("wheel", notScroll, { passive: false })
+	document.addEventListener("touchmove", notScroll, { passive: false })
   nextTick(() => {
     setTimeout(() => {
       isLoadingDisplay.value = false
+      if(!isLoadingDisplay.value) {
+        document.removeEventListener("wheel", notScroll, { passive: false })
+	      document.removeEventListener("touchmove", notScroll, { passive: false })
+      }
     }, 2000)
   })
 }
+
+const topAnimation = () => {
+  const tl = gsap.timeline()
+  const header = document.querySelector('#header')
+  const figure = document.querySelector('.figure')
+  const image = document.querySelector('.image')
+  const titles = document.querySelectorAll(`[class*="text"]`)
+  tl
+    .to( figure, { y: 0, opacity: 1 }, 1.75)
+    .to( image, { scale: 1, opacity: 1 }, 2.25)
+    .to( titles[0], { y: 0, opacity: 1, ease: Power4.out }, "-=.1")
+    .to( titles[1], { y: 0, opacity: 1, ease: Power4.out })
+    .to( titles[2], { y: 0, opacity: 1, ease: Power4.out })
+    .to( header, { y: 0, opacity: 1, ease: Circ.out}, "-=.1"
+  )
+}
+
+// const sessionStorageHandler = () => {
+//   const keyName = 'loadingviewed'
+//   const keyValue = 'true'
+//   if(!sessionStorage.getItem(keyName)) {
+//     sessionStorage.setItem(keyName, keyValue)
+//     loadingAnimation()
+//   } else {
+//     return 
+//   }
+// }
 
 const calculateWindowWidth = computed(() => {
   const display = window.innerWidth
@@ -71,6 +108,7 @@ onMounted(() => {
     removeSecond: 'top'
   };
   intersectionObserver(navigationElements.value, elements.value, options, classNames)
+  topAnimation()
 })
 </script>
 

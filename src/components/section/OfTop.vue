@@ -5,16 +5,29 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
 <template>
   <section :class="$style.main">
     <SectionOfContainer :class="$style.container">
-      <div :class="$style.title">
+      <div :class="$style.lead">
         <div>
-          <span>ちいさな</span>
-          <span>しあわせ</span>
-          <span>ここにある</span>
+          <span :class="$style.title">
+            <span :class="[$style.text, 'text01']">
+              ちいさな
+            </span>
+          </span>
+          <span :class="$style.title">
+            <span :class="[$style.text, 'text02']">
+              しあわせ
+            </span>
+          </span>
+          <span :class="$style.title">
+            <span :class="[$style.text, 'text03']">
+              ここにある
+            </span>
+          </span>
         </div>
       </div>
-      <figure :class="[$style.image, 'image']">
+      <figure :class="[$style.image, 'figure']">
         <img
-          src="@/assets/img/mask_02.jpg" alt=""
+          class="image"
+          src="@/assets/img/mask_02.jpg" 
           loading="lazy"
           content-visibility="auto"
         >
@@ -41,7 +54,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       flex-direction: column;
     }
 
-    .title {
+    .lead {
       flex           : 1 1 calc((40% - var(--navigation-width) + calc(var(--bv) * 10)));
       width          : calc((40% - var(--navigation-width) + calc(var(--bv) * 10)));
       display        : flex;
@@ -58,11 +71,19 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
         position: relative;
         z-index : 1;
 
-        > span {
+        .title {
           display       : block;
           font-size     : calcClamp(40, 60, 740, 1440);
           font-weight   : bold;
           letter-spacing: .35em;
+          overflow      : hidden;
+
+          > span {
+            display   : block;
+            opacity   : 0;
+            transform : translateY(110%);
+            transition: opacity .6s, transform .8s;
+          }
 
           @include mediaScreen('tablet') {
             font-size: calcClamp(24, 40, 375, 768);
@@ -73,12 +94,14 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
     }
 
     .image {
-      flex : 1 0 calc(60% - var(--navigation-width));
-      width: calc(60% - var(--navigation-width));
-      mask-image: url("@/assets/img/mask_01.svg");
-      mask-repeat: no-repeat;
+      flex         : 1 0 calc(60% - var(--navigation-width));
+      width        : calc(60% - var(--navigation-width));
+      mask-image   : url("@/assets/img/mask_01.svg");
+      mask-repeat  : no-repeat;
       mask-position: 50% 0;
-      mask-size: auto 100%;
+      mask-size    : auto 100%;
+      transition   : opacity 1s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 1s cubic-bezier(0.19, 1, 0.22, 1);
 
       @include mediaScreen('tablet') {
         flex    : 0 0 80%;
@@ -90,6 +113,12 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
   
       > img {
         display: block;
+        transform: scale(1.2);
+        transform-origin: center;
+        opacity: 0;
+        object-fit: cover;
+        transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+        opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
       }
     }
   }

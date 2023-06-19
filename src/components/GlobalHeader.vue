@@ -76,11 +76,13 @@ const toggleNavigation = () => {
 @use '../assets/scss/mixin' as *;
 
 .header {
-  padding         : calc(var(--bv) * 2) calc(var(--bv) * 2.5);
-  position        : relative;
-  color           : var(--green);
-  letter-spacing  : var(--letter-spacing-normal);
-  background-color: var(--cream);
+  padding              : calc(var(--bv) * 2) calc(var(--bv) * 2.5);
+  position             : relative;
+  color                : var(--green);
+  letter-spacing       : var(--letter-spacing-normal);
+  background-color     : var(--cream);
+  transform            : translateY(-110%);
+  transition           : opacity .6s, transform .8s;
 
   @include mediaScreen('tablet') {
     width   : 100%;
