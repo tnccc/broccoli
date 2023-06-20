@@ -6,7 +6,8 @@ type Emits = {
 }
 
 type Props = {
-  navigationElements: any
+  navigationElements: any,
+  isLoadingDisplay: boolean
 }
 
 const props = defineProps<Props>()
@@ -20,7 +21,10 @@ const smoothScroll = (sectionId: any) => {
 
 </script>
 <template>
-  <nav :class="$style.navigation">
+  <nav id="navigation" :class="[
+      $style.navigation,
+      {[$style.show]: !isLoadingDisplay}
+    ]">
     <ul :class="$style.list">
       <li
         v-for="item in filteredNavigation"
@@ -77,6 +81,14 @@ const smoothScroll = (sectionId: any) => {
   position: fixed;
   left    : calcClamp(8, 14, 768, 1440);
   bottom  : calc(var(--bv) * 11);
+  opacity : 0;
+  filter: blur(2px);
+  transition: all, 2s ease-in;
+
+  &.show {
+    filter : blur(0);
+    opacity: 1;
+  }
 
   @include mediaScreen('tablet') {
     display: none;

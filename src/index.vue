@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, nextTick } from 'vue'
+import { computed, onMounted, ref, nextTick, onUpdated } from 'vue'
 import { gsap, Power4, Circ } from 'gsap'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
@@ -16,7 +16,7 @@ const isLoadingDisplay = ref(true)
 const navigationStatus = ref(true)
 const elements = ref<NodeListOf<HTMLElement>>()
 
-const notScroll = (e) => {
+const notScroll = (e: any) => {
   e.preventDefault()
 }
 
@@ -124,9 +124,9 @@ onMounted(() => {
     @scrollToSection="scrollHandler"
     :navigationElements="navigationElements"
     :navigationStatus="navigationStatus"
+    :isLoadingDisplay="isLoadingDisplay"
   />
   <main :class="$style.main">
-    {{ calculateWindowWidth }}
     <SectionOfTop 
       id="top"
       :class="[$style.top, 'element', 'top']"
