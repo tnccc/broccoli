@@ -1,16 +1,16 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/custom.d.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*/*.d.ts"],
   "compilerOptions": {
     "typeRoots": [
-      "node_modules/@types", 
+      "node_modules/@types",
       "src/@types",
-      "custom.d.ts"
+      "./src/assets/types/custom.d.ts"
     ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
+    }
   },
 
   "references": [

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { navigation } from '@/assets/data/navigation';
-import { emit } from 'process';
 type Emits = {
   (e: string, sectionId: string): void
 }

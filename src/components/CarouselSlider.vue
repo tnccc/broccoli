@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//@ts-ignore
 import { 
   Splide, 
   SplideSlide,
@@ -19,7 +20,6 @@ const props = defineProps<Props>()
 const splide = ref()
 
 onMounted(() => {
-
   if( splide.value && splide.value.splide ) {
     console.log(splide.value.splide.length)
   }

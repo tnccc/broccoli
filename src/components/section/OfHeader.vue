@@ -6,7 +6,7 @@ type Props = {
   direction?: string
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { direction: 'default' })
 </script>
 
 <template>

@@ -27,8 +27,8 @@ const loadingAnimation = () => {
     setTimeout(() => {
       isLoadingDisplay.value = false
       if(!isLoadingDisplay.value) {
-        document.removeEventListener("wheel", notScroll, { passive: false })
-	      document.removeEventListener("touchmove", notScroll, { passive: false })
+        document.removeEventListener("wheel", notScroll, false)
+	      document.removeEventListener("touchmove", notScroll, false)
       }
     }, 2000)
   })
@@ -43,10 +43,10 @@ const topAnimation = () => {
   tl
     .to( figure, { y: 0, opacity: 1 }, 1.75)
     .to( image, { scale: 1, opacity: 1 }, 2.25)
-    .to( titles[0], { y: 0, opacity: 1, ease: Power4.out }, "-=.1")
-    .to( titles[1], { y: 0, opacity: 1, ease: Power4.out })
-    .to( titles[2], { y: 0, opacity: 1, ease: Power4.out })
-    .to( header, { y: 0, opacity: 1, ease: Circ.out}, "-=.1"
+    .to( titles[0], { y: 0, opacity: 1, ease: Power4.easeOut }, "-=.1")
+    .to( titles[1], { y: 0, opacity: 1, ease: Power4.easeOut })
+    .to( titles[2], { y: 0, opacity: 1, ease: Power4.easeOut })
+    .to( header, { y: 0, opacity: 1, ease: Circ.easeOut}, "-=.1"
   )
 }
 
