@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, nextTick, onUpdated } from 'vue'
+import { computed, onMounted, ref, nextTick } from 'vue'
 import { gsap, Power4, Circ } from 'gsap'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
@@ -62,8 +62,8 @@ const topAnimation = () => {
 // }
 
 const calculateWindowWidth = computed(() => {
-  const display = window.innerWidth
-  return display
+  console.log(window.innerWidth)
+  return window.innerWidth
 })
 
 const navigationElements = ref<NodeListOf<HTMLElement> | null>()
@@ -79,10 +79,11 @@ const navigationElements = ref<NodeListOf<HTMLElement> | null>()
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
+  console.log(targetElement)
   if(targetElement) {
     window.scrollTo({
-        top     : targetElement === top ? 0 : targetElement.offsetTop,
-        behavior: 'smooth',
+      top     : targetElement === top ? 0 : targetElement.offsetTop,
+      behavior: 'smooth',
     })
   }
 }
@@ -90,8 +91,7 @@ const scrollToSection = (sectionId: string) => {
 const scrollHandler = (sectionId: string) => {
   if(calculateWindowWidth.value <= 768) {
     scrollToSection(sectionId)
-    navigationStatus.value = false
-    console.log(sectionId)
+    console.log('mobile')
   } else {
     scrollToSection(sectionId)
     console.log('desktop')
@@ -123,10 +123,15 @@ onMounted(() => {
   <GlobalNavigation
     @scrollToSection="scrollHandler"
     :navigationElements="navigationElements"
-    :navigationStatus="navigationStatus"
     :isLoadingDisplay="isLoadingDisplay"
   />
-  <main :class="$style.main">
+  <main 
+    :class="[
+        $style.main,
+        {[$style.hide]: !isLoadingDisplay}
+      ]"
+  >
+    {{ calculateWindowWidth }}
     <SectionOfTop 
       id="top"
       :class="[$style.top, 'element', 'top']"
@@ -169,11 +174,14 @@ onMounted(() => {
 }
 
 .main {
-  display: flex;
+  display       : flex;
   flex-direction: column;
+  transition    : margin 2s;
 
   @include mediaScreen('tablet') {
-    margin-block-start: var(--header-height);
+    &.hide {
+      margin-block-start: var(--header-height);
+    }
   }
 
   .top {

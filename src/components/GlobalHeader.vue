@@ -9,13 +9,14 @@ type Props = {
 
 const props = defineProps<Props>()
 const isDisplayedNavigation = ref(false)
-watch(() => props.navigationStatus, (newStatus) => {
-  isDisplayedNavigation.value = newStatus
-  console.log(props.navigationStatus)
-  console.log(newStatus)
-})
+// watch(() => props.navigationStatus, (newStatus) => {
+//   isDisplayedNavigation.value = newStatus
+//   console.log(props.navigationStatus)
+//   console.log(newStatus)
+// })
 
 console.log(props.navigationStatus)
+// ボタン押下時の挙動をindex.vueで管理する？
 const toggleNavigation = () => {
   isDisplayedNavigation.value = !isDisplayedNavigation.value
 }
@@ -29,9 +30,6 @@ const toggleNavigation = () => {
         <a href="/">
           <img src="@/assets/img/instagram.png" alt="instagram">
         </a>
-      </div>
-      <div :class="$style.right_column">
-        <a href="#contact"><span>contact</span></a>
       </div>
       <button
         :class="[

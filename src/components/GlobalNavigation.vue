@@ -12,8 +12,6 @@ type Props = {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-const filteredNavigation = navigation.filter(item => item.name !== 'お問い合わせ' && item.path !== '#contact')
-
 const smoothScroll = (sectionId: any) => {
   emit('scrollToSection', sectionId)
 }
@@ -26,7 +24,7 @@ const smoothScroll = (sectionId: any) => {
     ]">
     <ul :class="$style.list">
       <li
-        v-for="item in filteredNavigation"
+        v-for="item in navigation"
         :key="item.name"
         :class="[$style.item, 'item']"
         :data="item.data"

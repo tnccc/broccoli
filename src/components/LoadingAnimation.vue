@@ -9,6 +9,8 @@ import Logo from '@/components/Logo.vue';
 </template>
 
 <style lang="scss" module>
+@use '@/assets/scss/mixin.scss' as *;
+
 .container {
   width           : 100%;
   height          : 100dvh;
@@ -20,6 +22,10 @@ import Logo from '@/components/Logo.vue';
     top     : 50%;
     left    : 50%;
     transform: translate(-50%, -50%);
+
+    @include mediaScreen('tablet') {
+      width: calc(var(--bv) * 30);
+    }
   }
 }
 </style>

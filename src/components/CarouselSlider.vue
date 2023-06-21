@@ -18,12 +18,6 @@ type Props = {
 
 const props = defineProps<Props>()
 const splide = ref()
-
-onMounted(() => {
-  if( splide.value && splide.value.splide ) {
-    console.log(splide.value.splide.length)
-  }
-})
 </script>
 
 <template>
