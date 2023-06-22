@@ -3,20 +3,26 @@ import { ref, watch } from 'vue'
 import { navigation } from '@/assets/data/navigation'
 import { imageUrl } from '@/module/imageUtils'
 
+type Emits = {
+  (e: string, sectionId: string): void
+}
+
 type Props = {
   navigationStatus: boolean
 }
 
 const props = defineProps<Props>()
 const isDisplayedNavigation = ref(false)
-// watch(() => props.navigationStatus, (newStatus) => {
-//   isDisplayedNavigation.value = newStatus
-//   console.log(props.navigationStatus)
-//   console.log(newStatus)
-// })
+const emit = defineEmits<Emits>()
 
-console.log(props.navigationStatus)
-// ボタン押下時の挙動をindex.vueで管理する？
+const smoothScroll = (sectionId: any) => {
+  emit('scrollToSection', sectionId)
+}
+
+watch(() => props.navigationStatus, () => {
+  toggleNavigation()
+})
+
 const toggleNavigation = () => {
   isDisplayedNavigation.value = !isDisplayedNavigation.value
 }
@@ -51,10 +57,12 @@ const toggleNavigation = () => {
             <li
               v-for="item in navigation"
               :class="$style.item"
-              :key="item.name
-              "
+              :key="item.name"
             >
-              <a :href="item.path">
+              <a
+                :href="item.path"
+                @click.prevent="smoothScroll(item.path.replace('#', ''))"
+              >
                 {{ item.name }}
                 <img 
                   v-if="item.path === 'instagram.png'"
@@ -178,56 +186,6 @@ const toggleNavigation = () => {
         }
       }
     }
-
-    .right_column {
-      > a {
-        display    : inline-block;
-        font-weight: bold;
-
-        > span {
-          text-transform: uppercase;
-        }
-
-        &:hover {
-          > span {
-            &::after {
-              width: 100%;
-            }
-          }
-        }
-
-        span {
-          position: relative;
-          z-index : 1;
-
-          &::after {
-            content         : "";
-            position        : absolute;
-            left            : 0;
-            bottom          : calc(var(--bv) / -2);
-            width           : 0%;
-            height          : 2px;
-            background-color: var(--green);
-            transition      : width .3s;
-          }
-        }
-
-        + a {
-          margin-inline-start: calc(var(--bv) * 3);
-        }
-      }
-
-      @include mediaScreen('tablet') {
-        opacity: 0;
-        visibility: hidden;
-
-        &.open {
-          opacity: 1;
-          visibility: visible;
-        }
-      }
-    }
-
     .navigation {
       width     : 100%;
       height    : 100dvh;
@@ -248,6 +206,10 @@ const toggleNavigation = () => {
         background-color: var(--white);
 
         .list {
+          display: flex;
+          flex-direction: column;
+          gap: calc(var(--bv) * 2);
+
           li {
             > a {
               font-size     : calcClamp(16, 32, 420, 768);
@@ -255,8 +217,8 @@ const toggleNavigation = () => {
               text-transform: uppercase;
             }
 
-            + li {
-              margin-block-start: calc(var(--bv) * 2);
+            &:last-of-type {
+              width: calc(var(--bv) * 4);
             }
           }
         }

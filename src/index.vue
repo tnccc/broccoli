@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, nextTick } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
 import { gsap, Power4, Circ } from 'gsap'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
@@ -12,9 +12,17 @@ import SectionOfLocation from '@/components/section/OfLocation.vue'
 import { intersectionObserver } from '@/module/intersectionObserver'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
+const desktopStatus = ref('')
 const isLoadingDisplay = ref(true)
 const navigationStatus = ref(true)
 const elements = ref<NodeListOf<HTMLElement>>()
+const navigationElements = ref<NodeListOf<HTMLElement> | null>()
+const mobileWidth = window.matchMedia('(max-width: 768px)')
+const observerOptions = {
+  root      : null,
+  rootMargin: '-50% 0px',
+  threshold : 0,
+}
 
 const notScroll = (e: any) => {
   e.preventDefault()
@@ -49,52 +57,29 @@ const topAnimation = () => {
     .to( header, { y: 0, opacity: 1, ease: Circ.easeOut}, "-=.1"
   )
 }
-
-// const sessionStorageHandler = () => {
-//   const keyName = 'loadingviewed'
-//   const keyValue = 'true'
-//   if(!sessionStorage.getItem(keyName)) {
-//     sessionStorage.setItem(keyName, keyValue)
-//     loadingAnimation()
-//   } else {
-//     return 
-//   }
-// }
-
-const calculateWindowWidth = computed(() => {
-  console.log(window.innerWidth)
-  return window.innerWidth
-})
-
-const navigationElements = ref<NodeListOf<HTMLElement> | null>()
-  const options = {
-  root      : null,
-  rootMargin: '-50% 0px',
-  threshold : 0,
-}
-
 //②画面幅を監視するメソッドを用意
 //③画面幅によってスクロールの処理を分岐する関数を用意
 //④画面幅が768以下で関数が実行されたら、GlobalHeaderのナビゲーションフラグをfalseにする
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
-  console.log(targetElement)
-  if(targetElement) {
-    window.scrollTo({
-      top     : targetElement === top ? 0 : targetElement.offsetTop,
-      behavior: 'smooth',
-    })
-  }
-}
-
-const scrollHandler = (sectionId: string) => {
-  if(calculateWindowWidth.value <= 768) {
-    scrollToSection(sectionId)
-    console.log('mobile')
+  if(window.matchMedia('(max-width: 768px)').matches) {
+    if(targetElement) {
+      window.scrollTo({
+        top     : targetElement === top ? 0 : targetElement.offsetTop,
+        behavior: 'smooth',
+      })
+      navigationStatus.value = !navigationStatus.value
+      console.log('mobile')
+    }
   } else {
-    scrollToSection(sectionId)
-    console.log('desktop')
+    if(targetElement) {
+      window.scrollTo({
+        top     : targetElement === top ? 0 : targetElement.offsetTop,
+        behavior: 'smooth',
+      })
+      console.log('desktop')
+    }
   }
 }
 
@@ -107,7 +92,7 @@ onMounted(() => {
     remove: 'concept',
     removeSecond: 'top'
   };
-  intersectionObserver(navigationElements.value, elements.value, options, classNames)
+  intersectionObserver(navigationElements.value, elements.value, observerOptions, classNames)
   topAnimation()
 })
 </script>
@@ -119,9 +104,12 @@ onMounted(() => {
       {[$style.hide]: !isLoadingDisplay}
     ]"
   />
-  <GlobalHeader :navigationStatus="navigationStatus"/>
+  <GlobalHeader
+    @scrollToSection="scrollToSection"
+    :navigationStatus="navigationStatus"
+  />
   <GlobalNavigation
-    @scrollToSection="scrollHandler"
+    @scrollToSection="scrollToSection"
     :navigationElements="navigationElements"
     :isLoadingDisplay="isLoadingDisplay"
   />
@@ -131,7 +119,7 @@ onMounted(() => {
         {[$style.hide]: !isLoadingDisplay}
       ]"
   >
-    {{ calculateWindowWidth }}
+    {{ desktopStatus }}
     <SectionOfTop 
       id="top"
       :class="[$style.top, 'element', 'top']"
@@ -197,6 +185,7 @@ onMounted(() => {
 
     @include mediaScreen('tablet') {
       margin-block-start: calc(var(--bv) * 5);
+      padding-block-start: var(--header-height);
     }
   }
 }
