@@ -14,10 +14,10 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
 const desktopStatus = ref('')
 const isLoadingDisplay = ref(true)
+const sessionStorageStatus = ref(false)
 const navigationStatus = ref(true)
 const elements = ref<NodeListOf<HTMLElement>>()
 const navigationElements = ref<NodeListOf<HTMLElement> | null>()
-const mobileWidth = window.matchMedia('(max-width: 768px)')
 const observerOptions = {
   root      : null,
   rootMargin: '-50% 0px',
@@ -44,7 +44,6 @@ const loadingAnimation = () => {
 
 const topAnimation = () => {
   const tl = gsap.timeline()
-  const header = document.querySelector('#header')
   const figure = document.querySelector('.figure')
   const image = document.querySelector('.image')
   const titles = document.querySelectorAll(`[class*="text"]`)
@@ -54,12 +53,8 @@ const topAnimation = () => {
     .to( titles[0], { y: 0, opacity: 1, ease: Power4.easeOut }, "-=.1")
     .to( titles[1], { y: 0, opacity: 1, ease: Power4.easeOut })
     .to( titles[2], { y: 0, opacity: 1, ease: Power4.easeOut })
-    .to( header, { y: 0, opacity: 1, ease: Circ.easeOut}, "-=.1"
-  )
 }
-//②画面幅を監視するメソッドを用意
-//③画面幅によってスクロールの処理を分岐する関数を用意
-//④画面幅が768以下で関数が実行されたら、GlobalHeaderのナビゲーションフラグをfalseにする
+
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
@@ -84,7 +79,15 @@ const scrollToSection = (sectionId: string) => {
 }
 
 onMounted(() => {
+  // const keyName = 'loadingViewed'
+  // const keyValue = 'true'
+  // if(!sessionStorage.getItem(keyName)) {
+  //   sessionStorage.setItem(keyName, keyValue)
+    
+    
+  // }
   loadingAnimation()
+    topAnimation()
   elements.value = document.querySelectorAll('.element')
   navigationElements.value = document.querySelectorAll('.item[data]')
   const classNames = {
@@ -93,7 +96,7 @@ onMounted(() => {
     removeSecond: 'top'
   };
   intersectionObserver(navigationElements.value, elements.value, observerOptions, classNames)
-  topAnimation()
+  
 })
 </script>
 

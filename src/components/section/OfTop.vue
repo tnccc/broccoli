@@ -8,7 +8,7 @@ import SectionOfContainer from '@/components/section/OfContainer.vue'
       <div :class="$style.lead">
         <div>
           <span :class="$style.title">
-            <span :class="[$style.text, 'text01']">
+            <span :class="[$style.text, 'text01' ]">
               ちいさな
             </span>
           </span>

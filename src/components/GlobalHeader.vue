@@ -29,7 +29,7 @@ const toggleNavigation = () => {
 </script>
 
 <template>
-  <header id="header" :class="$style.header">
+  <header :class="$style.header">
     <div :class="$style.container">
       <div :class="$style.left_column">
         <h1><img src="@/assets/img/svg/logo.svg" alt="broccoli"></h1>
@@ -87,8 +87,6 @@ const toggleNavigation = () => {
   color                : var(--green);
   letter-spacing       : var(--letter-spacing-normal);
   background-color     : var(--cream);
-  transform            : translateY(-110%);
-  transition           : opacity .6s, transform .8s;
 
   @include mediaScreen('tablet') {
     width   : 100%;
