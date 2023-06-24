@@ -21,7 +21,7 @@ import { imageUrl } from '@/module/imageUtils'
               :key="item.name"
               :class="$style.item"
             >
-              <figure :class="$style.image">
+              <figure :class="[$style.image, 'menu_image']">
                 <img
                   :src="imageUrl(item.image)"
                   :alt="item.alt"

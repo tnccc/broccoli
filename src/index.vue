@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, nextTick } from 'vue'
-import { gsap, Power4, Circ } from 'gsap'
+import { gsap, Power4, Power2} from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 import GlobalNavigation from '@/components/GlobalNavigation.vue'
@@ -55,6 +56,39 @@ const topAnimation = () => {
     .to( titles[2], { y: 0, opacity: 1, ease: Power4.easeOut })
 }
 
+const animationToConcept = () => {
+  gsap.registerPlugin(ScrollTrigger)
+  const concept = document.querySelector('#concept')
+  const conceptFigure = document.querySelectorAll('.concept_figure')
+  conceptFigure.forEach((image, i) => {
+    gsap.to(concept, {
+      scrollTrigger: {
+        trigger: concept,
+        start: 'top center',
+        once: true,
+        onEnter: () => image.classList.add('is-fade')
+      }
+    })
+  })
+}
+
+const animationToMenu = () => {
+  gsap.registerPlugin(ScrollTrigger)
+  const menu = document.querySelector('#menu')
+  const menu_image = document.querySelectorAll('.menu_image')
+  menu_image.forEach((image, i) => {
+    gsap.to(menu, {
+      scrollTrigger: {
+        markers: true,
+        trigger: menu,
+        start: 'top center',
+        once: true,
+        onEnter: () => image.classList.add('is-fade')
+      }
+    })
+  })
+}
+
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
   const top = document.getElementById('top')
@@ -65,7 +99,6 @@ const scrollToSection = (sectionId: string) => {
         behavior: 'smooth',
       })
       navigationStatus.value = !navigationStatus.value
-      console.log('mobile')
     }
   } else {
     if(targetElement) {
@@ -73,21 +106,12 @@ const scrollToSection = (sectionId: string) => {
         top     : targetElement === top ? 0 : targetElement.offsetTop,
         behavior: 'smooth',
       })
-      console.log('desktop')
     }
   }
 }
 
 onMounted(() => {
-  // const keyName = 'loadingViewed'
-  // const keyValue = 'true'
-  // if(!sessionStorage.getItem(keyName)) {
-  //   sessionStorage.setItem(keyName, keyValue)
-    
-    
-  // }
   loadingAnimation()
-    topAnimation()
   elements.value = document.querySelectorAll('.element')
   navigationElements.value = document.querySelectorAll('.item[data]')
   const classNames = {
@@ -96,7 +120,8 @@ onMounted(() => {
     removeSecond: 'top'
   };
   intersectionObserver(navigationElements.value, elements.value, observerOptions, classNames)
-  
+  topAnimation()
+  animationToConcept()
 })
 </script>
 

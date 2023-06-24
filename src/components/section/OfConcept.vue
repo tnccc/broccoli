@@ -16,7 +16,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
         <div :class="$style.contents">
           <div>
             <div :class="$style.image">
-              <figure :class="$style.figure">
+              <figure :class="[$style.figure, 'concept_figure concept_figure01']">
                 <img
                   src="@/assets/img/concept_01.png"
                   alt="OPEN"
@@ -24,7 +24,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
                   content-visibility="auto"
                 >
               </figure>
-              <figure :class="$style.figure">
+              <figure :class="[$style.figure, 'concept_figure concept_figure02']">
                 <img
                   src="@/assets/img/concept_02.png"
                   loading="lazy"
@@ -44,6 +44,43 @@ import SectionContainer from '@/components/section/OfContainer.vue'
     </SectionContainer>
   </section>
 </template>
+
+<style lang="scss">
+.concept_figure {
+  opacity: 0;
+  overflow: hidden;
+
+  > img {
+    transform-origin: center;
+    transform: scale(1.4);
+    
+  }
+
+  &01 {
+    transition: opacity .5s linear;
+
+    > img {
+      transition: transform 1s cubic-bezier(.19,1,.22,1);
+    }
+  }
+
+  &02 {
+    transition: opacity .85s linear;
+
+    > img {
+      transition: transform 1.35s cubic-bezier(.26,1,.26,1);
+    }
+  }
+
+  &.is-fade {
+    opacity: 1;
+
+    > img {
+      transform: scale(1);
+    }
+  }
+}
+</style>
 
 <style lang="scss" module>
 @use '@/assets/scss/function.scss' as *;
