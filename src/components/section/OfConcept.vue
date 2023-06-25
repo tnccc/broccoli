@@ -16,7 +16,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
         <div :class="$style.contents">
           <div>
             <div :class="$style.image">
-              <figure :class="[$style.figure, 'concept_figure concept_figure01']">
+              <figure :class="[$style.figure, 'concept_item concept_figure concept_figure01']">
                 <img
                   src="@/assets/img/concept_01.png"
                   alt="OPEN"
@@ -24,7 +24,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
                   content-visibility="auto"
                 >
               </figure>
-              <figure :class="[$style.figure, 'concept_figure concept_figure02']">
+              <figure :class="[$style.figure, 'concept_item concept_figure concept_figure02']">
                 <img
                   src="@/assets/img/concept_02.png"
                   loading="lazy"
@@ -32,7 +32,7 @@ import SectionContainer from '@/components/section/OfContainer.vue'
                 >
               </figure>
             </div>
-            <div :class="$style.text">
+            <div :class="[$style.text, 'concept_item concept_text']">
               <p>
                 「Broccoli」へようこそ！オシャレなランチやカフェ体験を求めるあなたにぴったりの場所です。私たちは、美意識の高い女性に向けて、心地よい空間と美味しい料理を提供しています。
                 私たちの店内は、洗練された雰囲気と温かみのあるインテリアで彩られています。木のぬくもりが感じられるテーブルやカウンター席で、ゆったりとした時間をお過ごしください。また、窓から差し込む自然光が店内を明るく照らし、絵画のような風景が目の前に広がります。
@@ -53,7 +53,6 @@ import SectionContainer from '@/components/section/OfContainer.vue'
   > img {
     transform-origin: center;
     transform: scale(1.4);
-    
   }
 
   &01 {
@@ -77,6 +76,26 @@ import SectionContainer from '@/components/section/OfContainer.vue'
 
     > img {
       transform: scale(1);
+    }
+  }
+}
+
+.concept_text {
+  overflow: hidden;
+  
+  > p {
+    transition: all 1s;
+    opacity   : 0;
+    filter: blur(2px);
+    transform : translateX(20%);
+  }
+
+  &.is-fade {
+
+    > p {
+      opacity  : 1;
+      filter   : blur(0);
+      transform: translateX(0)
     }
   }
 }

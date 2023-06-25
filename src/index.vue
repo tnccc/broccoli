@@ -59,14 +59,14 @@ const topAnimation = () => {
 const animationToConcept = () => {
   gsap.registerPlugin(ScrollTrigger)
   const concept = document.querySelector('#concept')
-  const conceptFigure = document.querySelectorAll('.concept_figure')
-  conceptFigure.forEach((image, i) => {
+  const conceptItems = document.querySelectorAll('.concept_item')
+  conceptItems.forEach((item, i) => {
     gsap.to(concept, {
       scrollTrigger: {
         trigger: concept,
         start: 'top center',
         once: true,
-        onEnter: () => image.classList.add('is-fade')
+        onEnter: () => item.classList.add('is-fade')
       }
     })
   })
