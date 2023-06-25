@@ -73,21 +73,22 @@ const animationToConcept = () => {
 }
 
 const animationToMenu = () => {
-  gsap.registerPlugin(ScrollTrigger)
-  const menu = document.querySelector('#menu')
-  const menu_image = document.querySelectorAll('.menu_image')
-  menu_image.forEach((image, i) => {
-    gsap.to(menu, {
+  gsap.registerPlugin(ScrollTrigger);
+  const menuItems = document.querySelectorAll('.menu_item');
+  menuItems.forEach((item, index) => {
+    gsap.from(item, {
+      y: 20,
       scrollTrigger: {
-        markers: true,
-        trigger: menu,
+        trigger: item,
         start: 'top center',
         once: true,
-        onEnter: () => image.classList.add('is-fade')
-      }
-    })
-  })
-}
+      },
+      opacity: 0,
+      ease: 'power2.out', 
+      delay: index * 0.2, 
+    });
+  });
+};
 
 const scrollToSection = (sectionId: string) => {
   const targetElement = document.getElementById(sectionId)
@@ -122,6 +123,7 @@ onMounted(() => {
   intersectionObserver(navigationElements.value, elements.value, observerOptions, classNames)
   topAnimation()
   animationToConcept()
+  animationToMenu()
 })
 </script>
 

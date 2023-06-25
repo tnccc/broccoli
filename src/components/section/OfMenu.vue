@@ -19,9 +19,9 @@ import { imageUrl } from '@/module/imageUtils'
             <div
               v-for="item in menus"
               :key="item.name"
-              :class="$style.item"
+              :class="[$style.item, 'menu_item']"
             >
-              <figure :class="[$style.image, 'menu_image']">
+              <figure :class="$style.image">
                 <img
                   :src="imageUrl(item.image)"
                   :alt="item.alt"
